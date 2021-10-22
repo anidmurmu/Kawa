@@ -1,6 +1,6 @@
 package com.example.kawa.domain.usecase.di
 
-import com.example.kawa.domain.repository.PersonRepository
+import com.example.kawa.domain.repository.PersonInfoRepository
 import com.example.kawa.domain.usecase.GetPersonInfoListUseCase
 import com.example.kawa.domain.usecase.GetPersonInfoListUseCaseImpl
 import dagger.Module
@@ -15,7 +15,7 @@ class PersonInfoModule {
 
     @Provides
     @ActivityRetainedScoped
-    fun provideGetPersonInfoListUseCase(personRepository: PersonRepository): GetPersonInfoListUseCase {
-        return GetPersonInfoListUseCaseImpl(personRepository)
+    fun provideGetPersonInfoListUseCase(personInfoRepository: PersonInfoRepository): GetPersonInfoListUseCase {
+        return GetPersonInfoListUseCaseImpl(personInfoRepository)
     }
 }
