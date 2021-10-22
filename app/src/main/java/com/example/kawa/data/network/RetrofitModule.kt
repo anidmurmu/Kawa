@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 const val BASE_URL = "https://randomuser.me/api/"
@@ -28,6 +29,20 @@ object RetrofitModule {
     @Singleton
     fun provideConverterFactory(): GsonConverterFactory {
         return GsonConverterFactory.create()
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(
+        httpLoggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .connectTimeout(200, TimeUnit.SECONDS)
+            .readTimeout(200, TimeUnit.SECONDS)
+            .writeTimeout(200, TimeUnit.SECONDS)
+            .retryOnConnectionFailure(true)
+            .addInterceptor(httpLoggingInterceptor)
+            .build()
     }
 
     @Provides
