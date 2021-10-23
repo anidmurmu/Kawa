@@ -19,7 +19,8 @@ class MainViewModel @Inject constructor(
 
     init {
         viewModelScope.launch(Dispatchers.IO) {
-            val inc = "gender"
+            //val inc = "gender"
+            val inc = "gender,name,nat,location,picture,email"
             val results = 20
             val resp = getPersonInfoListUseCase.getPersonInfoList(inc, results)
             when(resp) {
