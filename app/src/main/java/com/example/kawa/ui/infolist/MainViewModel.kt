@@ -32,10 +32,9 @@ class MainViewModel @Inject constructor(
                 is Response.Success -> {
                     val viewableList = getViewableDataForList(resp.data.personInfoList)
                     updatePersonInfoList(viewableList)
-                    Log.d("apple", resp.data.personInfoList.toString())
                 }
                 is Response.Failure -> {
-                    Log.d("apple", resp.error.toString())
+                    Log.d("MainViewModel", resp.error.toString())
                 }
             }
         }
@@ -48,9 +47,7 @@ class MainViewModel @Inject constructor(
     }
 
     private fun updatePersonInfoList(list: List<BaseBindingRVModel>) {
-        Log.d("apple list", list[1].toString())
         _viewState.value?.personInfoList?.postValue(list)
-        Log.d("apple size", _viewState.value?.personInfoList?.value?.size?.toString() + "")
     }
 
 }
