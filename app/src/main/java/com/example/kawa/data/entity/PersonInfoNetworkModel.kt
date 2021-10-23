@@ -40,17 +40,17 @@ data class PersonInfoNetworkModel(
     @Expose
     val name: NameNetworkModel,
 
-    /*@SerializedName("location")
+    @SerializedName("location")
     @Expose
-    val location: LocationNetworkModel,*/
+    val location: LocationNetworkModel,
 
     @SerializedName("email")
     @Expose
     val email: String,
 
-    /*@SerializedName("picture")
+    @SerializedName("picture")
     @Expose
-    val picture: PictureNetworkModel,*/
+    val picture: PictureNetworkModel,
 
     @SerializedName("nat")
     @Expose
@@ -90,7 +90,7 @@ data class LocationNetworkModel(
 
     @SerializedName("postcode")
     @Expose
-    val postcode: Long,
+    val postcode: String,
 
     @SerializedName("coordinates")
     @Expose
