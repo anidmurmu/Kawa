@@ -27,5 +27,7 @@ class MainActivity : AppCompatActivity() {
             model,
             MainVHFactory()
         )
+
+        model.getPersonInfoList()
     }
 }

@@ -1,4 +1,4 @@
-package com.ather.dashboard.tron.utils.bindings
+package com.example.kawa.ui.bindings
 
 import androidx.databinding.BindingAdapter
 import com.google.android.material.textfield.TextInputLayout

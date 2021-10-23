@@ -28,7 +28,7 @@ class MainVHFactory : BaseViewHolderBindingFactory() {
         viewClickCallback: ViewOnClickListener?
     ): BaseBindingViewHolder<out BaseBindingRVModel> {
         return when (viewType) {
-            R.layout.item_list_info -> UnselectedListViewHolder(binding, viewClickCallback)
+            R.layout.item_list_info -> UnselectedListItemViewHolder(binding, viewClickCallback)
 
             else -> BaseBindingViewHolder(binding)
         }
@@ -42,16 +42,16 @@ class MainVHFactory : BaseViewHolderBindingFactory() {
  *
  * @param binding A binding for view
  */
-class UnselectedListViewHolder(
+class UnselectedListItemViewHolder(
     binding: ViewDataBinding,
     private val viewClickCallback: ViewOnClickListener?
-) : BaseBindingViewHolder<UnselectedListRVModel>(binding) {
+) : BaseBindingViewHolder<UnselectedListItemRVModel>(binding) {
     /**
      * This is a method when view is bind
      *
      * @param model Model for item in recycler view
      */
-    override fun bindView(model: UnselectedListRVModel) {
+    override fun bindView(model: UnselectedListItemRVModel) {
 
     }
 }
@@ -61,7 +61,7 @@ class UnselectedListViewHolder(
  *
  * @property personInfoUiModel Model for item view
  */
-class UnselectedListRVModel(private val personInfoUiModel: PersonInfoUiModel) :
+class UnselectedListItemRVModel(private val personInfoUiModel: PersonInfoUiModel) :
     BaseBindingRVModel {
     /**
      * This method get the layout id for item in recycler view

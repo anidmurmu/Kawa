@@ -1,4 +1,4 @@
-package com.ather.dashboard.tron.utils.bindings
+package com.example.kawa.ui.bindings
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView

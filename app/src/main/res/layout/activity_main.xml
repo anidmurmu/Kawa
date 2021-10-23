@@ -15,20 +15,31 @@
         android:layout_height="match_parent"
         tools:context=".ui.infolist.MainActivity">
 
+        <TextView
+            android:id="@+id/abc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="this is test"
+            android:textSize="24sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPersonInfo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            data="@{viewModel.viewState.personInfoList}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:data="@{viewModel.viewState.personInfoList}"
             android:layout_marginBottom="12dp"
             android:clipToPadding="false"
             android:paddingBottom="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0" />
+            tools:listitem="@layout/item_list_info"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

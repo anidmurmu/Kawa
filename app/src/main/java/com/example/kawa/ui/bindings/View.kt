@@ -1,4 +1,4 @@
-package com.ather.dashboard.tron.utils.bindings
+package com.example.kawa.ui.bindings
 
 import android.view.View
 import android.widget.Toast

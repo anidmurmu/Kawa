@@ -1,4 +1,4 @@
-package com.ather.dashboard.tron.utils.bindings
+package com.example.kawa.ui.bindings
 
 import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
