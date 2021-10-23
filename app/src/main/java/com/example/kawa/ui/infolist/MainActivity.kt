@@ -22,10 +22,10 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel = model
         binding.lifecycleOwner = this
 
-        /*binding.rvPersonInfo.adapter = RVModelBindingAdapter(
+        binding.rvPersonInfo.adapter = RVModelBindingAdapter(
             emptyList(),
             model,
-
-        )*/
+            MainVHFactory()
+        )
     }
 }

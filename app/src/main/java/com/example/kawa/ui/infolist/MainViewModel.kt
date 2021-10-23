@@ -2,6 +2,8 @@ package com.example.kawa.ui.infolist
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.kawa.domain.Response
 import com.example.kawa.domain.usecase.GetPersonInfoListUseCase
@@ -17,13 +19,16 @@ class MainViewModel @Inject constructor(
     private val getPersonInfoListUseCase: GetPersonInfoListUseCase
 ) : BaseViewModel(application) {
 
+    private val _viewState: MutableLiveData<MainViewState> = MutableLiveData()
+    val viewState: LiveData<MainViewState> = _viewState
+
     init {
         viewModelScope.launch(Dispatchers.IO) {
             //val inc = "gender"
             val inc = "gender,name,nat,location,picture,email"
             val results = 20
             val resp = getPersonInfoListUseCase.getPersonInfoList(inc, results)
-            when(resp) {
+            when (resp) {
                 is Response.Success -> {
                     Log.d("apple", resp.data.personInfoList.toString())
                 }
