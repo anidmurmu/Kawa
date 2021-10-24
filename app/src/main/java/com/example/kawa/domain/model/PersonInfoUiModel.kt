@@ -17,5 +17,10 @@ data class PersonInfoUiModel(
     val name: String,
     val email: String,
     val streetNumber: String,
-    val streetName: String
+    val streetName: String,
+    val country: String,
+    val postCode: String,
+    val timezoneOffset: String,
+    val timezoneDesc: String,
+    val gender: String
 )

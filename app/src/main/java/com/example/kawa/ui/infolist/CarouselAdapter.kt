@@ -41,6 +41,7 @@ class CarouselAdapter(private val personInfoList: List<PersonInfoUiModel>) :
         private val tvName = view.findViewById<TextView>(R.id.tvName)
         private val tvStreet = view.findViewById<TextView>(R.id.tvStreet)
         private val tvCountryAndPostCode = view.findViewById<TextView>(R.id.tvCountryAndPostCode)
+        private val tvTimezone = view.findViewById<TextView>(R.id.tvTime)
         private val tvGender = view.findViewById<TextView>(R.id.tvGender)
 
 
@@ -76,6 +77,25 @@ class CarouselAdapter(private val personInfoList: List<PersonInfoUiModel>) :
             )
             tvStreet.text = spannableStreet
 
+            val countryAndPostcodeSpan = SpannableString(personInfoUiModel.country
+            + ", "
+            + personInfoUiModel.postCode)
+
+            countryAndPostcodeSpan.setSpan(
+                styleSpanBold,
+                0,
+                personInfoUiModel.country.length,
+                Spanned.SPAN_INCLUSIVE_INCLUSIVE
+            )
+            tvCountryAndPostCode.text = countryAndPostcodeSpan
+
+
+            val timezoneSpan = SpannableString(personInfoUiModel.timezoneOffset
+                    + "- "
+                    + personInfoUiModel.timezoneDesc)
+            tvTimezone.text = timezoneSpan
+
+            tvGender.text = personInfoUiModel.gender.replaceFirstChar { it.uppercaseChar() }
         }
     }
 }

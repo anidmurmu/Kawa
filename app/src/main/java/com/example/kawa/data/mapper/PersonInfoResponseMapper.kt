@@ -23,11 +23,18 @@ class PersonInfoResponseMapper @Inject constructor() :
     private fun mapToUiModelList(source: List<PersonInfoNetworkModel>): List<PersonInfoUiModel> {
         return source.map {
             PersonInfoUiModel(
-                it.gender + " . " + it.nationality,
+                it.gender.replaceFirstChar {
+                        ch -> ch.uppercaseChar()
+                } + " . " + it.nationality,
                 it.name.title + ". " + it.name.first + " " + it.name.last,
                 it.email,
-                it.location.street.number.toString(),
-                it.location.street.name
+                it.location.street.number,
+                it.location.street.name,
+                it.location.country,
+                it.location.postcode,
+                it.location.timezone.offset,
+                it.location.timezone.description,
+                it.gender
             )
         }
     }
