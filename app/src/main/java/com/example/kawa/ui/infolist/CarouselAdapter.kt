@@ -3,6 +3,7 @@ package com.example.kawa.ui.infolist
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kawa.R
@@ -13,7 +14,7 @@ class CarouselAdapter(private val personInfoList: List<PersonInfoUiModel>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.item_caraousel,
+            R.layout.item_carousel,
             parent,
             false
         )
@@ -29,9 +30,13 @@ class CarouselAdapter(private val personInfoList: List<PersonInfoUiModel>) :
     }
 
     inner class CarouselViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-        private val textViewEmail: TextView = view.findViewById<TextView>(R.id.tvEmail)
+        private val profilePic = view.findViewById<ImageView>(R.id.ivPicture)
+        private val name = view.findViewById<TextView>(R.id.tvName)
+        private val street = view.findViewById<TextView>(R.id.tvStreet)
+        private val countryAndPostCode = view.findViewById<TextView>(R.id.tvCountryAndPostCode)
+        private val gender = view.findViewById<TextView>(R.id.tvGender)
         fun bindView(personInfoUiModel: PersonInfoUiModel) {
-            textViewEmail.text = personInfoUiModel.email
+            name.text = personInfoUiModel.name
         }
     }
 }

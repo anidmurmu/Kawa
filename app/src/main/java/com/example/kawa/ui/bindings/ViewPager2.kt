@@ -6,7 +6,7 @@ import com.example.kawa.ui.base.RVModelBindingAdapter
 import com.example.kawa.ui.base.recyclerview.BaseBindingRVModel
 import com.example.kawa.ui.base.recyclerview.BaseRVBindingAdapter
 
-@BindingAdapter("data")
+@BindingAdapter("viewPagerData")
 fun <T : BaseBindingRVModel> setViewPager2Properties(viewPager2: ViewPager2, data: List<T>?) {
     data?.let {
         if (viewPager2.adapter is BaseRVBindingAdapter<*>) {

@@ -23,8 +23,8 @@ class MainViewModel @Inject constructor(
     private val getPersonInfoListUseCase: GetPersonInfoListUseCase
 ) : BaseViewModel(application) {
 
-    private val _viewState: MutableStateFlow<MainViewState> = MutableStateFlow(MainViewState.InitialState)
-    val viewState: StateFlow<MainViewState> = _viewState
+    private val _viewState: MutableLiveData<MainViewState> = MutableLiveData(MainViewState())
+    val viewState: LiveData<MainViewState> = _viewState
 
     fun getPersonInfoList() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -34,7 +34,8 @@ class MainViewModel @Inject constructor(
                 is Response.Success -> {
                     val viewableList = getViewableDataForList(resp.data.personInfoList)
                     updatePersonInfoList(viewableList)
-                    updateViewState(MainViewState.HasDataState(resp.data.personInfoList))
+                    _viewState.value?.personInfoListCarousel?.postValue(resp.data.personInfoList)
+                    //updateViewState(MainViewState.HasDataState(resp.data.personInfoList))
                     Log.d("apple", resp.data.personInfoList.toString())
                 }
                 is Response.Failure -> {
@@ -44,12 +45,8 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    fun getPersonInfoListSize(): Int {
-        return _viewState.value.personInfoList.value?.size ?: 0
-    }
-
     private fun updateViewState(viewState: MainViewState) {
-        _viewState.value = viewState
+        _viewState.postValue(viewState)
     }
 
     fun getViewableDataForList(personInfoList: List<PersonInfoUiModel>): List<BaseBindingRVModel> {
@@ -59,7 +56,7 @@ class MainViewModel @Inject constructor(
     }
 
     private fun updatePersonInfoList(list: List<BaseBindingRVModel>) {
-        _viewState.value.personInfoList.postValue(list)
+        _viewState.value?.personInfoList?.postValue(list)
     }
 
 }
