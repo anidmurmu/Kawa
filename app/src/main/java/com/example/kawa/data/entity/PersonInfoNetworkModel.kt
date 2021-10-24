@@ -124,7 +124,7 @@ data class Coordinates(
 data class StreetNetworkModel(
     @SerializedName("number")
     @Expose
-    val location: Double,
+    val number: String,
 
     @SerializedName("name")
     @Expose

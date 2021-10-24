@@ -28,6 +28,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="This is my Name"
+            android:textColor="@color/pink"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/ivPicture"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,11 +43,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             tools:text="This is my Name"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             app:layout_constraintTop_toBottomOf="@id/tvName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="8dp"
             android:layout_marginStart="24dp"/>
 
         <TextView

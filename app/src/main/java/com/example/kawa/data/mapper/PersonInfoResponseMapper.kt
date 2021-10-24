@@ -25,7 +25,9 @@ class PersonInfoResponseMapper @Inject constructor() :
             PersonInfoUiModel(
                 it.gender + " . " + it.nationality,
                 it.name.title + ". " + it.name.first + " " + it.name.last,
-                it.email
+                it.email,
+                it.location.street.number.toString(),
+                it.location.street.name
             )
         }
     }

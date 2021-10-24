@@ -15,5 +15,7 @@ data class PersonInfoUiModelResponse(
 data class PersonInfoUiModel(
     val genderAndNat: String,
     val name: String,
-    val email: String
+    val email: String,
+    val streetNumber: String,
+    val streetName: String
 )
