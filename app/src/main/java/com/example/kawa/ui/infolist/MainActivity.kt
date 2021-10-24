@@ -43,23 +43,12 @@ class MainActivity : AppCompatActivity() {
         })
 
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-            }
-
             override fun onPageSelected(position: Int) {
                 model.viewState.value?.personInfoListCarousel?.value?.let {
                     val viewableList = model.getViewableDataForList(it, position)
                     model.updatePersonInfoList(viewableList)
+                    binding.rvPersonInfo.scrollToPosition(position)
                 }
-            }
-
-            override fun onPageScrollStateChanged(state: Int) {
-                super.onPageScrollStateChanged(state)
             }
         })
     }
