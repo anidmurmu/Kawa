@@ -9,6 +9,7 @@ import com.example.kawa.R
 import com.example.kawa.domain.Response
 import com.example.kawa.domain.model.PersonInfoUiModel
 import com.example.kawa.domain.usecase.GetPersonInfoListUseCase
+import com.example.kawa.ui.base.Event
 import com.example.kawa.ui.base.recyclerview.BaseBindingRVModel
 import com.example.kawa.ui.base.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -24,6 +25,9 @@ class MainViewModel @Inject constructor(
 
     private val _viewState: MutableLiveData<MainViewState> = MutableLiveData(MainViewState())
     val viewState: LiveData<MainViewState> = _viewState
+
+    private val _viewEvent: MainEvent = MainEvent()
+    val viewEvent = _viewEvent
 
     fun getPersonInfoList() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -67,6 +71,10 @@ class MainViewModel @Inject constructor(
         _viewState.value?.personInfoList?.postValue(list)
     }
 
+    fun getSelectedPosition(): Int {
+        return _viewState.value?.selectedPosition?.value ?: -1
+    }
+
     override fun onViewClick(id: Int, data: Any) {
         when (id) {
             R.id.on_click_item -> {
@@ -74,6 +82,8 @@ class MainViewModel @Inject constructor(
                 viewState.value?.personInfoListCarousel?.value?.let {
                     val viewableList = getViewableDataForList(it, position)
                     updatePersonInfoList(viewableList)
+                    _viewState.value?.selectedPosition?.value = position
+                    viewEvent.itemListClickEvent.postValue(Event(true))
                 }
             }
         }

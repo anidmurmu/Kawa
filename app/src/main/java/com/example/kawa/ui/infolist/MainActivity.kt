@@ -37,6 +37,11 @@ class MainActivity : AppCompatActivity() {
             binding.viewPager.adapter = CarouselAdapter(it)
         })
 
+        model.viewEvent.itemListClickEvent.observe(this, {
+            val selectedPosition = model.getSelectedPosition()
+            binding.viewPager.setCurrentItem(selectedPosition, true)
+        })
+
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(
                 position: Int,
