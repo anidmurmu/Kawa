@@ -63,7 +63,7 @@ class MainViewModel @Inject constructor(
         return newList
     }
 
-    private fun updatePersonInfoList(list: List<BaseBindingRVModel>) {
+    fun updatePersonInfoList(list: List<BaseBindingRVModel>) {
         _viewState.value?.personInfoList?.postValue(list)
     }
 

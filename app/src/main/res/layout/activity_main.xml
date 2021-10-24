@@ -13,31 +13,43 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:elevation="4dp"
         tools:context=".ui.infolist.MainActivity">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPager"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="0dp"
             android:layout_height="250dp"
-            app:viewPagerData="@{viewModel.viewState.personInfoList}"
-            app:layout_constraintTop_toTopOf="parent"
+            android:elevation="4dp"
+            app:cardCornerRadius="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:viewPagerData="@{viewModel.viewState.personInfoList}"
+                android:layout_marginBottom="8dp"/>
+        </androidx.cardview.widget.CardView>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPersonInfo"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:data="@{viewModel.viewState.personInfoList}"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="12dp"
             android:clipToPadding="false"
             android:paddingBottom="16dp"
+            app:data="@{viewModel.viewState.personInfoList}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/viewPager"
-            tools:listitem="@layout/item_list_info"/>
+            app:layout_constraintTop_toBottomOf="@id/cardView"
+            tools:listitem="@layout/item_list_info" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

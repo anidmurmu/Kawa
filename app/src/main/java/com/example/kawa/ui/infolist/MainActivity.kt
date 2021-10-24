@@ -8,6 +8,10 @@ import com.example.kawa.R
 import com.example.kawa.databinding.ActivityMainBinding
 import com.example.kawa.ui.base.RVModelBindingAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager.widget.ViewPager.OnPageChangeListener
+import androidx.viewpager2.widget.ViewPager2
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -33,5 +37,25 @@ class MainActivity : AppCompatActivity() {
             binding.viewPager.adapter = CarouselAdapter(it)
         })
 
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+            }
+
+            override fun onPageSelected(position: Int) {
+                model.viewState.value?.personInfoListCarousel?.value?.let {
+                    val viewableList = model.getViewableDataForList(it, position)
+                    model.updatePersonInfoList(viewableList)
+                }
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+                super.onPageScrollStateChanged(state)
+            }
+        })
     }
 }
