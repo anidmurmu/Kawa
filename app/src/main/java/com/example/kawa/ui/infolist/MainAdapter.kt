@@ -30,6 +30,8 @@ class MainVHFactory : BaseViewHolderBindingFactory() {
         return when (viewType) {
             R.layout.item_list_info -> UnselectedListItemViewHolder(binding, viewClickCallback)
 
+            R.layout.item_list_info_selected -> SelectedListItemViewHolder(binding, viewClickCallback)
+
             else -> BaseBindingViewHolder(binding)
         }
     }
@@ -52,7 +54,27 @@ class UnselectedListItemViewHolder(
      * @param model Model for item in recycler view
      */
     override fun bindView(model: UnselectedListItemRVModel) {
+        itemView.setOnClickListener {
+            val position = adapterPosition
+            viewClickCallback?.onViewClick(R.id.on_click_item, position)
+        }
+    }
+}
 
+class SelectedListItemViewHolder(
+    binding: ViewDataBinding,
+    private val viewClickCallback: ViewOnClickListener?
+) : BaseBindingViewHolder<SelectedListItemRVModel>(binding) {
+    /**
+     * This is a method when view is bind
+     *
+     * @param model Model for item in recycler view
+     */
+    override fun bindView(model: SelectedListItemRVModel) {
+        itemView.setOnClickListener {
+            val position = adapterPosition
+            viewClickCallback?.onViewClick(R.id.on_click_item, position)
+        }
     }
 }
 
@@ -70,6 +92,31 @@ class UnselectedListItemRVModel(private val personInfoUiModel: PersonInfoUiModel
      */
     override fun getLayoutId(): Int {
         return R.layout.item_list_info
+    }
+
+    /**
+     * This method puts list of models for the item view in recycler view
+     *
+     * @return It returns list of model for item view
+     */
+    override fun getBindingPairs(): List<Pair<Int, Any>> {
+        return listOf(
+            Pair(
+                BR.bindingVariableModel,
+                personInfoUiModel
+            )
+        )
+    }
+}
+class SelectedListItemRVModel(private val personInfoUiModel: PersonInfoUiModel) :
+    BaseBindingRVModel {
+    /**
+     * This method get the layout id for item in recycler view
+     *
+     * @return layout id of the item view
+     */
+    override fun getLayoutId(): Int {
+        return R.layout.item_list_info_selected
     }
 
     /**

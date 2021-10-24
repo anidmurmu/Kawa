@@ -22,5 +22,6 @@ data class PersonInfoUiModel(
     val postCode: String,
     val timezoneOffset: String,
     val timezoneDesc: String,
-    val gender: String
+    val gender: String,
+    val isSelected: Boolean = false
 )
