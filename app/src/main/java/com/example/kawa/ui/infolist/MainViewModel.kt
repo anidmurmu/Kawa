@@ -12,6 +12,8 @@ import com.example.kawa.ui.base.recyclerview.BaseBindingRVModel
 import com.example.kawa.ui.base.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,8 +23,8 @@ class MainViewModel @Inject constructor(
     private val getPersonInfoListUseCase: GetPersonInfoListUseCase
 ) : BaseViewModel(application) {
 
-    private val _viewState: MutableLiveData<MainViewState> = MutableLiveData(MainViewState())
-    val viewState: LiveData<MainViewState> = _viewState
+    private val _viewState: MutableStateFlow<MainViewState> = MutableStateFlow(MainViewState.InitialState)
+    val viewState: StateFlow<MainViewState> = _viewState
 
     fun getPersonInfoList() {
         viewModelScope.launch(Dispatchers.IO) {
@@ -32,6 +34,8 @@ class MainViewModel @Inject constructor(
                 is Response.Success -> {
                     val viewableList = getViewableDataForList(resp.data.personInfoList)
                     updatePersonInfoList(viewableList)
+                    updateViewState(MainViewState.HasDataState(resp.data.personInfoList))
+                    Log.d("apple", resp.data.personInfoList.toString())
                 }
                 is Response.Failure -> {
                     Log.d("MainViewModel", resp.error.toString())
@@ -40,14 +44,22 @@ class MainViewModel @Inject constructor(
         }
     }
 
-    private fun getViewableDataForList(personInfoList: List<PersonInfoUiModel>): List<BaseBindingRVModel> {
+    fun getPersonInfoListSize(): Int {
+        return _viewState.value.personInfoList.value?.size ?: 0
+    }
+
+    private fun updateViewState(viewState: MainViewState) {
+        _viewState.value = viewState
+    }
+
+    fun getViewableDataForList(personInfoList: List<PersonInfoUiModel>): List<BaseBindingRVModel> {
         return personInfoList.map {
             UnselectedListItemRVModel(it)
         }
     }
 
     private fun updatePersonInfoList(list: List<BaseBindingRVModel>) {
-        _viewState.value?.personInfoList?.postValue(list)
+        _viewState.value.personInfoList.postValue(list)
     }
 
 }
