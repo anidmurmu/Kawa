@@ -4,13 +4,11 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.viewpager2.widget.ViewPager2
 import com.example.kawa.R
 import com.example.kawa.databinding.ActivityMainBinding
 import com.example.kawa.ui.base.RVModelBindingAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.viewpager.widget.ViewPager
-import androidx.viewpager.widget.ViewPager.OnPageChangeListener
-import androidx.viewpager2.widget.ViewPager2
 
 
 @AndroidEntryPoint

@@ -38,18 +38,12 @@ class MainViewModel @Inject constructor(
                     val viewableList = getViewableDataForList(resp.data.personInfoList, 0)
                     updatePersonInfoList(viewableList)
                     _viewState.value?.personInfoListCarousel?.postValue(resp.data.personInfoList)
-                    //updateViewState(MainViewState.HasDataState(resp.data.personInfoList))
-                    Log.d("apple", resp.data.personInfoList.toString())
                 }
                 is Response.Failure -> {
                     Log.d("MainViewModel", resp.error.toString())
                 }
             }
         }
-    }
-
-    private fun updateViewState(viewState: MainViewState) {
-        _viewState.postValue(viewState)
     }
 
     fun getViewableDataForList(
